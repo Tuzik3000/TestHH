@@ -28,9 +28,9 @@ public class VacantionPupblicationScreen extends MainScreen {
     static String newbaseXpathText = "//input[@data-code='%s']";
     static String buyButtonXpath = "//*[@data-qa='cart-item %s']//*[@data-qa='cart-item__button-add']";
     static String deleteButtonXpath = "//li[@data-qa='cart-item %s']//*[contains(text(),'Убрать')]";
-    static String checkOrderPriceXpath = "//li[@data-qa='cart-item %s']//*[@data-qa='money__amount']";
-    static String baseCostValue = "//div[@data-qa='cart-item %s']//*[@data-qa='money__amount' and contains(@class,'price-countable-service__cost-amount')]";
-    static String checkOrderPriceXpathCheck ="//li[@data-qa='cart-item %s']//*[@data-qa='money__currency']";
+    static String checkOrderPriceXpath = "//*[@data-qa='money__amount']";
+    static String baseCostValue = "//*[@data-qa='money__amount' and contains(@class,'price-countable-service__cost-amount')]";
+    static String checkOrderPriceXpathCheck ="//*[@data-qa='money__currency']";
 
     public static void logToScreen(WebDriver mydriver) {
         basicWaiter(mydriver, String.format(baseXpathText,"Публикации вакансий"));
@@ -39,7 +39,7 @@ public class VacantionPupblicationScreen extends MainScreen {
 
     public static void checkRates(WebDriver mydriver, String vacantionType) {
 
-        WebElement elem = mydriver.findElement(By.xpath(String.format("//*[@data-qa='cart-item %s']/script",vacantionType)));
+        WebElement elem = mydriver.findElement(By.xpath("//*[@class=\"HH-PriceCart-Total HH-AddItemToCartAnimation-TotalCost\"]"));
         List<String> newarray = Arrays.asList(elem.getAttribute("data-params").split("\\D+"));
         List<testArray> newlist = new ArrayList<testArray>();
         for (int i = 1; i < newarray.size()-2; i+=2 ) {
